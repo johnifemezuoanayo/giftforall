@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
@@ -11,6 +10,14 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+  redirects() {
+    return [{ source: "/contact", destination: "/about#contact", permanent: false }];
+  },
+  images: {
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
+    qualities: [70, 80],
   },
 };
 

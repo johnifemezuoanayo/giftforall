@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# [BRAND NAME] – Gift discovery homepage
 
-## Getting Started
+Homepage for an affiliate gift discovery site. People browse gifts, save the ones they like, then buy on the retailer's website (Amazon, Temu, etc.). There is no login, checkout or payment.
 
-First, run the development server:
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind CSS 4, Framer Motion, Lucide icons.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Where things live
 
-## Learn More
+| What | Where |
+| --- | --- |
+| Brand name, menus, footer links | `src/config/site.ts` |
+| Sample products (trending carousel) | `src/data/products.ts` |
+| Recipients, collections, occasions, articles, videos | `src/data/home.ts` |
+| Data types | `src/types/index.ts` |
+| Retailers and affiliate link helpers | `src/lib/retailers.ts` |
+| Saved items (kept in localStorage) | `src/context/saved-context.tsx` |
+| Listing pages: wording, editorial intro (`feature`) and which products show (`rule`) | `src/data/recipient-pages.ts` (`/gifts/...`), `occasion-pages.ts` (`/occasions/...`), `discover-pages.ts` (`/discover/...`), `unique-finds-pages.ts` (`/unique-finds/...`) |
+| Shared listing page layout (intro, filters, grid) | `src/components/listing/` |
+| Interest tiles | `src/data/interests.ts` |
+| Gift finder (`/gift-finder`): people, occasions and budgets | `src/data/gift-finder.ts` |
+| Gift finder matching and ranking | `src/lib/gift-finder.ts` |
+| Page sections | `src/components/sections/` |
+| Reusable cards (product, collection, article, ...) | `src/components/cards/`, `src/components/product/` |
+| Colors and fonts | `src/app/globals.css` (`@theme`) |
 
-To learn more about Next.js, take a look at the following resources:
+## Before launch
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Brand name:** change `site.name` in `src/config/site.ts`.
+- **Products:** everything in `src/data/` is sample data. Prices are marked "Sample price" on the page. Replace with approved affiliate product data. Each product only needs to match the `Product` type.
+- **Affiliate links:** sample products use retailer search links. Set `NEXT_PUBLIC_AMAZON_TAG` to add your Amazon Associates tag, or put real product links in `affiliateUrl`.
+- **New retailer:** add it to `RetailerId` in `src/types/index.ts` and to `retailers` in `src/lib/retailers.ts`.
+- **Site URL:** set `NEXT_PUBLIC_SITE_URL` so Open Graph links are correct.
+- **Images:** photos come from Unsplash and are resized by Unsplash's CDN (`src/lib/image-loader.ts`). Local images in `/public` also work.
+- **Newsletter:** the form only checks the email and shows a success message. Connect it to your email provider.
+- **Contact page (`/about#contact`):** the form only checks the fields and shows a success message. Connect it to a form or email service, and replace the placeholder `contactEmail` in `src/config/site.ts`. `/contact` redirects to this section.
+- **About page wording:** statements like "commissions never decide what we feature" are placeholder brand promises. Make sure they match how you actually run the site.
+- **Videos:** add a `videoUrl` to any item in `discoveryVideos` and it will play in the pop-up.
+- **Product hover media:** in `src/data/products.ts`, give a product an `altPhotoId` (second photo) or a `videoUrl` (short muted clip). It shows when someone hovers the product photo or taps the "+1 photo" / "video" button. The cactus planter uses a free CC0 sample clip from MDN; swap it for a real product video.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Links to pages that don't exist yet (gift guides, categories, etc.) show a friendly "coming soon" page.
