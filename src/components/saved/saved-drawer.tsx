@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Heart, Trash2, X } from "lucide-react";
 import { useSaved } from "@/context/saved-context";
 import { useModal } from "@/hooks/use-modal";
 import { formatPrice } from "@/lib/format";
+import { getProductHref } from "@/lib/links";
 import { getRetailerName } from "@/lib/retailers";
 
 export function SavedDrawer() {
@@ -81,12 +83,22 @@ export function SavedDrawer() {
                         transition={{ duration: 0.25 }}
                         className="flex gap-4 border-b border-line py-5"
                       >
-                        <div className="relative size-24 shrink-0 overflow-hidden bg-sand">
+                        <Link
+                          href={getProductHref(product)}
+                          onClick={closeSaved}
+                          tabIndex={-1}
+                          aria-hidden
+                          className="relative size-24 shrink-0 overflow-hidden bg-sand"
+                        >
                           <Image src={product.image.src} alt={product.image.alt} fill sizes="96px" quality={70} className="object-cover" />
-                        </div>
+                        </Link>
                         <div className="flex min-w-0 flex-1 flex-col">
                           <p className="eyebrow text-[0.62rem] text-olive">{getRetailerName(product.retailer)}</p>
-                          <p className="mt-1 font-semibold leading-snug">{product.name}</p>
+                          <p className="mt-1 font-semibold leading-snug">
+                            <Link href={getProductHref(product)} onClick={closeSaved} className="underline-offset-4 hover:underline">
+                              {product.name}
+                            </Link>
+                          </p>
                           <p className="mt-1 text-sm">
                             {formatPrice(product.price)}
                             {product.isSampleData && <span className="ml-2 text-xs text-stone">sample price</span>}

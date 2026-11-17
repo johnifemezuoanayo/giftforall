@@ -5,10 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Search, X } from "lucide-react";
+import { ArrowRight, ChevronRight, Search, X } from "lucide-react";
 import { publicApiUrl } from "@/config/site";
 import { useSiteData } from "@/context/site-data-context";
 import { formatPrice } from "@/lib/format";
+import { getProductHref } from "@/lib/links";
 import { getRetailerName } from "@/lib/retailers";
 import type { Product } from "@/types";
 
@@ -190,10 +191,9 @@ export function HeaderSearch({ className = "" }: { className?: string }) {
                   <ul className="space-y-1">
                     {matches.map((product) => (
                       <li key={product.id}>
-                        <a
-                          href={product.affiliateUrl}
-                          target="_blank"
-                          rel="sponsored noopener noreferrer"
+                        <Link
+                          href={getProductHref(product)}
+                          onClick={() => setOpen(false)}
                           className="group flex items-center gap-3 rounded-lg p-2 transition-colors hover:bg-cream"
                         >
                           <span className="relative size-12 shrink-0 overflow-hidden rounded bg-sand">
@@ -205,8 +205,8 @@ export function HeaderSearch({ className = "" }: { className?: string }) {
                               {formatPrice(product.price)} · {getRetailerName(product.retailer)}
                             </span>
                           </span>
-                          <ArrowUpRight className="ml-auto size-4 shrink-0 text-stone group-hover:text-forest" aria-hidden />
-                        </a>
+                          <ChevronRight className="ml-auto size-4 shrink-0 text-stone group-hover:text-forest" aria-hidden />
+                        </Link>
                       </li>
                     ))}
                   </ul>

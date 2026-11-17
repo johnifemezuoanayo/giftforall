@@ -1,6 +1,5 @@
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { ListingSkeleton, ListingView, getListingMetadata } from "@/components/listing/listing-view";
+import { ListingView, getListingMetadata } from "@/components/listing/listing-view";
 import { getListingPage, getSectionPages } from "@/lib/catalog";
 
 export async function generateStaticParams() {
@@ -14,15 +13,7 @@ export async function generateMetadata({ params }: PageProps<"/unique-finds/[slu
   return page ? getListingMetadata(page) : {};
 }
 
-export default function UniqueFindsPage({ params }: PageProps<"/unique-finds/[slug]">) {
-  return (
-    <Suspense fallback={<ListingSkeleton />}>
-      <UniqueFindsContent params={params} />
-    </Suspense>
-  );
-}
-
-async function UniqueFindsContent({ params }: { params: PageProps<"/unique-finds/[slug]">["params"] }) {
+export default async function UniqueFindsPage({ params }: PageProps<"/unique-finds/[slug]">) {
   const { slug } = await params;
   const page = await getListingPage("unique-finds", slug);
   if (!page) notFound();

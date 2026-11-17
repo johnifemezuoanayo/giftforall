@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #f7f3ed;
-  --color-cream: #efe8dd;
+  --color-paper: #ffffff;
+  --color-cream: #f4f4f2;
   --color-sand: #e6ddcf;
   --color-ink: #1d1b18;
   --color-ink-soft: #3b3731;
@@ -20,6 +20,7 @@
 
   --font-display: var(--font-dm-sans), system-ui, sans-serif;
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --font-logo: var(--font-fraunces), Georgia, serif;
 
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }

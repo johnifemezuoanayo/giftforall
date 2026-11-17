@@ -1,6 +1,5 @@
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { ListingSkeleton, ListingView, getListingMetadata } from "@/components/listing/listing-view";
+import { ListingView, getListingMetadata } from "@/components/listing/listing-view";
 import { getListingPage, getSectionPages } from "@/lib/catalog";
 
 export async function generateStaticParams() {
@@ -14,15 +13,7 @@ export async function generateMetadata({ params }: PageProps<"/gifts/[slug]">) {
   return page ? getListingMetadata(page) : {};
 }
 
-export default function RecipientGiftsPage({ params }: PageProps<"/gifts/[slug]">) {
-  return (
-    <Suspense fallback={<ListingSkeleton />}>
-      <RecipientGiftsContent params={params} />
-    </Suspense>
-  );
-}
-
-async function RecipientGiftsContent({ params }: { params: PageProps<"/gifts/[slug]">["params"] }) {
+export default async function RecipientGiftsPage({ params }: PageProps<"/gifts/[slug]">) {
   const { slug } = await params;
   const page = await getListingPage("gifts", slug);
   if (!page) notFound();

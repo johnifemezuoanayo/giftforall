@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import type { Article } from "@/types";
 
 export function GuidesSection({ articles }: { articles: Article[] }) {
-  const [feature, second, ...others] = articles;
+  const [feature, second, ...others] = articles.slice(0, 4);
   if (!feature || !second) return null;
 
   return (

@@ -1,4 +1,4 @@
-# [BRAND NAME] – Gift discovery homepage
+# giftforall – Gift discovery homepage
 
 Homepage for an affiliate gift discovery site. People browse gifts, save the ones they like, then buy on the retailer's website (Amazon, Temu, etc.). There is no login, checkout or payment.
 

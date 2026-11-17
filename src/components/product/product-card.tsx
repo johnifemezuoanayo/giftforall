@@ -2,10 +2,12 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Heart, Images, LoaderCircle, Pause, Play } from "lucide-react";
 import { useSaved } from "@/context/saved-context";
 import { useSiteData } from "@/context/site-data-context";
+import { getProductHref } from "@/lib/links";
 import { formatPrice } from "@/lib/format";
 import { getRetailerName } from "@/lib/retailers";
 import type { Product } from "@/types";
@@ -76,14 +78,7 @@ export function ProductCard({
         onMouseEnter={() => hasExtra && switchMedia(true, true)}
         onMouseLeave={() => hasExtra && switchMedia(false, true)}
       >
-        <a
-          href={product.affiliateUrl}
-          target="_blank"
-          rel="sponsored noopener noreferrer"
-          tabIndex={-1}
-          aria-hidden
-          className="absolute inset-0 block"
-        >
+        <Link href={getProductHref(product)} tabIndex={-1} aria-hidden className="absolute inset-0 block">
           <Image
             src={product.image.src}
             alt={product.image.alt}
@@ -116,7 +111,7 @@ export function ProductCard({
               className={`absolute inset-0 size-full object-cover transition-opacity duration-500 ${showExtra ? "opacity-100" : "opacity-0"}`}
             />
           )}
-        </a>
+        </Link>
 
         {product.badge && (
           <span className="absolute left-2.5 top-2.5 bg-paper px-2 py-1 text-[10px] font-semibold uppercase tracking-wider @[14rem]:left-3 @[14rem]:top-3 @[14rem]:px-2.5 @[14rem]:text-[11px]">
@@ -153,14 +148,9 @@ export function ProductCard({
         <h3
           className={`mt-1.5 font-semibold leading-snug ${showDetails ? "text-lg @[22rem]:text-xl" : "text-[0.95rem] @[14rem]:text-[1.05rem]"}`}
         >
-          <a
-            href={product.affiliateUrl}
-            target="_blank"
-            rel="sponsored noopener noreferrer"
-            className="underline-offset-4 hover:underline"
-          >
+          <Link href={getProductHref(product)} className="underline-offset-4 hover:underline">
             {product.name}
-          </a>
+          </Link>
         </h3>
 
         {showDetails && product.details ? (

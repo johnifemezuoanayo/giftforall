@@ -8,7 +8,6 @@ import { Carousel } from "@/components/ui/carousel";
 import {
   getArticle,
   getCatalog,
-  getEditorsPick,
   getInterestsForListing,
   getPageHref,
   getProductsForListing,
@@ -32,27 +31,6 @@ export function getListingMetadata(page: ListingPage): Metadata {
     description: `${page.tagline} Browse unusual, thoughtful ${page.title} from retailers you already know.`,
     openGraph: { title, description: page.tagline, images: [{ url: `${page.feature.image.src}?w=1200&h=630&fit=crop&q=80` }] },
   };
-}
-
-export function ListingSkeleton() {
-  return (
-    <div className="container-page animate-pulse pt-4 md:pt-6" aria-busy="true" aria-label="Loading gifts">
-      <div className="h-3 w-48 rounded bg-sand" />
-      <div className="mt-8 grid gap-10 lg:grid-cols-2">
-        <div className="space-y-4">
-          <div className="h-5 w-56 rounded-full bg-sand" />
-          <div className="h-14 w-full rounded-lg bg-sand" />
-          <div className="h-40 w-full rounded-lg bg-sand" />
-        </div>
-        <div className="aspect-[5/4] rounded-[1.75rem] bg-mint" />
-      </div>
-      <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {Array.from({ length: 6 }, (_, index) => (
-          <div key={index} className="aspect-[4/5] bg-sand" />
-        ))}
-      </div>
-    </div>
-  );
 }
 
 export async function ListingView({ page }: { page: ListingPage }) {
@@ -113,7 +91,7 @@ export async function ListingView({ page }: { page: ListingPage }) {
           </ol>
         </nav>
 
-        <FeatureHeader feature={page.feature} giftCount={products.length} topPick={getEditorsPick(page, products)} />
+        <FeatureHeader feature={page.feature} giftCount={products.length} />
 
         <ListingShop
           gridTitle={page.gridTitle ?? `all ${page.title}`}

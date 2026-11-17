@@ -1,0 +1,17 @@
+<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="420" fill="#FFF9F3"/>
+  <g transform="translate(80 72)">
+    <rect x="0" y="72" width="220" height="160" rx="34" fill="#F6E2D8"/>
+    <rect x="28" y="34" width="164" height="110" rx="24" fill="#F4A261"/>
+    <path d="M29 123H191" stroke="#C86D3B" stroke-width="12" stroke-linecap="round"/>
+    <path d="M110 34V192" stroke="#C86D3B" stroke-width="12" stroke-linecap="round"/>
+    <path d="M43 57L110 123L177 57" stroke="#C86D3B" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M74 72C84 64 96 60 110 60C124 60 136 64 146 72" stroke="#FFF9F3" stroke-width="8" stroke-linecap="round"/>
+    <path d="M117 93L125 111L143 119L125 127L117 145L109 127L91 119L109 111L117 93Z" fill="#F7D682"/>
+  </g>
+  <g transform="translate(360 110)">
+    <text x="0" y="110" font-family="Poppins, Avenir, Arial, sans-serif" font-size="94" font-weight="700" letter-spacing="-4" fill="#2F241F">Johnny</text>
+    <rect x="4" y="140" width="320" height="8" rx="4" fill="#F4A261"/>
+    <text x="0" y="190" font-family="Poppins, Avenir, Arial, sans-serif" font-size="28" font-weight="500" letter-spacing="4" fill="#9B6A4C">THOUGHTFUL GIFTS</text>
+  </g>
+</svg>

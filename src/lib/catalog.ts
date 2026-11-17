@@ -61,9 +61,37 @@ export function getArticle(articles: Article[], id: string) {
   return articles.find((article) => article.id === id) ?? articles[0];
 }
 
-// Picks a product that fits the page's main interest, so each page shows a different editor's pick.
-export function getEditorsPick(page: ListingPage, products: Product[]) {
-  const mainInterest = page.interests[0];
-  const matching = products.filter((product) => product.interests.includes(mainInterest));
-  return matching.find((product) => product.badge) ?? matching[0] ?? getTopPicks(products)[0];
+export async function getProduct(id: string) {
+  const products = await getProducts();
+  return products.find((product) => product.id === id);
+}
+
+// Products with a shared interest come first, then ones for the same kind of person.
+export function getSimilarProducts(product: Product, allProducts: Product[], count = 8) {
+  const others = allProducts.filter((item) => item.id !== product.id);
+  const sameInterest = others.filter((item) => item.interests.some((interest) => product.interests.includes(interest)));
+  const sameAudience = others.filter(
+    (item) => !sameInterest.includes(item) && item.audiences.some((audience) => product.audiences.includes(audience)),
+  );
+  return [...sameInterest, ...sameAudience].slice(0, count);
+}
+
+export function getGiftPagesForProduct(product: Product, pages: ListingPage[], count = 5) {
+  return pages
+    .filter((page) => page.section === "gifts" && page.slug && productMatchesRule(product, page.rule))
+    .slice(0, count);
+}
+
+export async function getGuide(slug: string) {
+  const content = await getContent();
+  return content.articles.find((article) => article.href === `/guides/${slug}`);
+}
+
+export function getProductsForGuide(article: Article, allProducts: Product[], count = 12) {
+  const rule = article.rule;
+  if (!rule) return getTopPicks(allProducts, count);
+  return getTopPicks(
+    allProducts.filter((product) => productMatchesRule(product, rule)),
+    count,
+  );
 }

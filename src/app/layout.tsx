@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Fraunces } from "next/font/google";
 import { siteUrl } from "@/config/site";
 import { getCategories, getContent } from "@/lib/api";
 import { Providers } from "@/components/providers";
@@ -13,6 +13,14 @@ import "./globals.css";
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const logoFont = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: "600",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -44,7 +52,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#f7f3ed",
+  themeColor: "#ffffff",
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
@@ -58,7 +66,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   };
 
   return (
-    <html lang="en" className={dmSans.variable} data-scroll-behavior="smooth">
+    <html lang="en" className={`${dmSans.variable} ${logoFont.variable}`} data-scroll-behavior="smooth">
       <body className="flex min-h-screen flex-col">
         <Providers siteData={siteData}>
           <a

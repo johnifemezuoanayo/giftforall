@@ -16,7 +16,7 @@ export function CollectionsSection({ collections }: { collections: Collection[] 
             eyebrow="Curated collections"
             title="Discover something different."
             text="Hand-picked edits for when you want a gift with a bit of personality."
-            link={{ label: "All collections", href: "/collections" }}
+            link={{ label: "All collections", href: "/discover" }}
           />
         </Reveal>
 

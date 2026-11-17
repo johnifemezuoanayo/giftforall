@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Johnny Brand Concepts</title>
+    <style>
+      :root {
+        --bg: #f8f5f1;
+        --panel: #ffffff;
+        --ink: #2d2926;
+        --muted: #6d655f;
+        --line: #eadfd5;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+      }
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px 80px;
+      }
+      h1 {
+        margin: 0 0 24px;
+        font-size: 42px;
+        letter-spacing: -1px;
+      }
+      .grid {
+        display: grid;
+        gap: 28px;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: 0 16px 38px rgba(22,17,13,0.04);
+      }
+      .card h2 {
+        margin: 0 0 12px;
+        font-size: 22px;
+      }
+      .card img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        background: #fff;
+      }
+      .meta {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Johnny Logo Concepts</h1>
+      <div class="grid">
+        <div class="card">
+          <h2>Concept 1 — Gift Spark</h2>
+          <img src="./concept-1-gift-spark.svg" alt="Gift spark concept" />
+          <div class="meta">Warm, friendly, gift-first identity.</div>
+        </div>
+
+        <div class="card">
+          <h2>Concept 2 — Ribbon Monogram</h2>
+          <img src="./concept-2-ribbon-monogram.svg" alt="Ribbon monogram concept" />
+          <div class="meta">More premium and personal brand direction.</div>
+        </div>
+
+        <div class="card">
+          <h2>Concept 3 — Curated Stack</h2>
+          <img src="./concept-3-curated-stack.svg" alt="Curated stack concept" />
+          <div class="meta">Clean, organized, catalog-style brand system.</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

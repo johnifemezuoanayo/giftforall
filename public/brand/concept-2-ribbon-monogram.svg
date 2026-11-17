@@ -1,0 +1,16 @@
+<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="420" fill="#FDF5F7"/>
+  <g transform="translate(80 68)">
+    <path d="M92 24C118 32 148 47 168 72C192 102 186 146 166 177C146 208 111 228 82 236C50 244 20 238 0 210C-17 186 0 146 36 130C64 117 93 117 117 102C122 85 124 58 92 24Z" fill="#E7B6C5"/>
+    <path d="M110 50C155 50 191 86 191 131C191 176 155 212 110 212C65 212 29 176 29 131C29 86 65 50 110 50Z" fill="#B94E6E"/>
+    <path d="M105 85V170C105 185 96 195 81 195H65C50 195 41 185 41 170V156C41 141 50 132 65 132H88V85H105Z" fill="#FDF5F7"/>
+    <path d="M65 111H109" stroke="#FDF5F7" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="178" cy="82" r="20" fill="#F3C98E"/>
+    <path d="M178 52V62M178 102V112M148 82H158M198 82H208" stroke="#FDF5F7" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(380 118)">
+    <text x="0" y="104" font-family="Georgia, 'Times New Roman', serif" font-size="94" font-weight="700" letter-spacing="-2" fill="#31263A">Johnny</text>
+    <text x="0" y="164" font-family="Poppins, Avenir, Arial, sans-serif" font-size="28" font-weight="600" letter-spacing="6" fill="#8A627A">CURATED GIFTING</text>
+    <path d="M0 186H355" stroke="#E7B6C5" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -120,6 +120,10 @@ export type Article = {
   href: string;
   readTime: string;
   image: Photo;
+  // Paragraphs shown on the guide's own page.
+  body?: string[];
+  // Decides which products the guide lists.
+  rule?: ProductRule;
 };
 
 export type DiscoveryVideo = {

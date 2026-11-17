@@ -1,14 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { formatPrice } from "@/lib/format";
-import { getRetailerName } from "@/lib/retailers";
-import type { Product, RecipientFeature } from "@/types";
+import { ArrowDown } from "lucide-react";
+import type { RecipientFeature } from "@/types";
 
 type FeatureHeaderProps = {
   feature: RecipientFeature;
   giftCount: number;
-  topPick?: Product;
 };
 
 export function Headline({ text, highlight }: { text: string; highlight: string }) {
@@ -34,7 +31,7 @@ export function Headline({ text, highlight }: { text: string; highlight: string 
   );
 }
 
-export function FeatureHeader({ feature, giftCount, topPick }: FeatureHeaderProps) {
+export function FeatureHeader({ feature, giftCount }: FeatureHeaderProps) {
   return (
     <header className="grid gap-x-14 pb-14 pt-6 md:pt-8 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:pb-20">
       <div className="lg:col-span-6 lg:self-end">
@@ -52,50 +49,16 @@ export function FeatureHeader({ feature, giftCount, topPick }: FeatureHeaderProp
         </h1>
       </div>
 
-      <div className="relative mb-6 mt-12 lg:col-span-6 lg:col-start-7 lg:row-span-2 lg:row-start-1 lg:my-0 lg:self-center">
-        <div className="absolute -right-2 -top-4 bottom-10 left-10 rounded-[2rem] bg-mint md:-right-4 md:-top-6 md:left-16" aria-hidden />
-
-        <div className="relative aspect-[5/4] overflow-hidden rounded-[1.75rem] bg-sand shadow-[0_30px_60px_-35px_rgba(15,90,58,0.55)]">
-          <Image
-            src={feature.image.src}
-            alt={feature.image.alt}
-            fill
-            priority
-            sizes="(min-width: 1024px) 46vw, 100vw"
-            quality={80}
-            className="object-cover"
-          />
-        </div>
-
-        <div className="absolute -top-5 right-5 grid size-24 rotate-6 place-items-center rounded-full bg-gold text-center text-ink shadow-lg md:size-28">
-          <span className="leading-tight">
-            <span className="block text-2xl font-bold md:text-3xl">{giftCount}</span>
-            <span className="block text-[11px] font-semibold uppercase tracking-wider">gift ideas</span>
-          </span>
-        </div>
-
-        {topPick && (
-          <a
-            href={topPick.affiliateUrl}
-            target="_blank"
-            rel="sponsored noopener noreferrer"
-            className="group absolute -bottom-7 left-4 flex w-[min(330px,85%)] items-center gap-3 rounded-2xl bg-white p-3 pr-4 shadow-[0_20px_40px_-20px_rgba(29,27,24,0.45)] transition-transform hover:-translate-y-0.5 md:left-6"
-            aria-label={`Editor's pick: check out ${topPick.name} at ${getRetailerName(topPick.retailer)} (opens in a new tab)`}
-          >
-            <span className="relative size-16 shrink-0 overflow-hidden rounded-xl bg-sand">
-              <Image src={topPick.image.src} alt="" fill sizes="64px" quality={70} className="object-cover" />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="eyebrow block text-[0.6rem] text-clay">Editor&apos;s pick</span>
-              <span className="mt-0.5 block truncate text-sm font-semibold">{topPick.name}</span>
-              <span className="block text-xs text-stone">
-                {formatPrice(topPick.price)} · {getRetailerName(topPick.retailer)}
-                {topPick.isSampleData && " · sample price"}
-              </span>
-            </span>
-            <ArrowUpRight className="size-4 shrink-0 text-stone group-hover:text-forest" aria-hidden />
-          </a>
-        )}
+      <div className="relative mt-8 aspect-[5/4] overflow-hidden rounded-[1.75rem] bg-sand lg:col-span-6 lg:col-start-7 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:self-center">
+        <Image
+          src={feature.image.src}
+          alt={feature.image.alt}
+          fill
+          priority
+          sizes="(min-width: 1024px) 46vw, 100vw"
+          quality={80}
+          className="object-cover"
+        />
       </div>
       <div className="lg:col-span-6 lg:col-start-1 lg:row-start-2">
         <p className="mt-7 text-[1.02rem] leading-[1.9] text-ink-soft md:text-[1.06rem]">
