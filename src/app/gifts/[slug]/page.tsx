@@ -1,11 +1,7 @@
+import { io } from "next/cache";
 import { notFound } from "next/navigation";
 import { ListingView, getListingMetadata } from "@/components/listing/listing-view";
-import { getListingPage, getSectionPages } from "@/lib/catalog";
-
-export async function generateStaticParams() {
-  const pages = await getSectionPages("gifts");
-  return pages.filter((page) => page.slug).map((page) => ({ slug: page.slug }));
-}
+import { getListingPage } from "@/lib/catalog";
 
 export async function generateMetadata({ params }: PageProps<"/gifts/[slug]">) {
   const { slug } = await params;
@@ -14,6 +10,7 @@ export async function generateMetadata({ params }: PageProps<"/gifts/[slug]">) {
 }
 
 export default async function RecipientGiftsPage({ params }: PageProps<"/gifts/[slug]">) {
+  await io();
   const { slug } = await params;
   const page = await getListingPage("gifts", slug);
   if (!page) notFound();

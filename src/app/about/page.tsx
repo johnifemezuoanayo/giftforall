@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { io } from "next/cache";
+import { connection } from "next/server";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ChevronDown, ChevronRight, Quote } from "lucide-react";
@@ -10,6 +12,7 @@ import { BagIcon, GiftIcon, UnlockIcon } from "@/components/icons/promise-icons"
 import { Headline } from "@/components/listing/feature-header";
 
 export async function generateMetadata(): Promise<Metadata> {
+  await connection();
   const { site } = await getContent();
   return {
     title: "About Us & Contact",
@@ -64,6 +67,7 @@ const getFaqs = (siteName: string) => [
 ];
 
 export default async function AboutPage() {
+  await io();
   const [{ site }, products, pages] = await Promise.all([getContent(), getProducts(), getListingPages()]);
   const faqs = getFaqs(site.name);
   const facts = [

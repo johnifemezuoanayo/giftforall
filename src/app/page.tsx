@@ -1,3 +1,4 @@
+import { io } from "next/cache";
 import { Hero } from "@/components/sections/hero";
 import { PromiseStrip } from "@/components/sections/promise-strip";
 import { RecipientsSection } from "@/components/sections/recipients-section";
@@ -10,6 +11,7 @@ import { NewsletterSection } from "@/components/sections/newsletter-section";
 import { getContent, getProducts } from "@/lib/api";
 
 export default async function HomePage() {
+  await io();
   const [content, products] = await Promise.all([getContent(), getProducts()]);
   const trendingProducts = products.filter((product) => product.trending);
 

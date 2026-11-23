@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
+import { io } from "next/cache";
 import { notFound } from "next/navigation";
 import { ProductView } from "@/components/product/product-view";
-import { getProducts } from "@/lib/api";
 import { getProduct } from "@/lib/catalog";
-
-export async function generateStaticParams() {
-  const products = await getProducts();
-  return products.map((product) => ({ slug: product.id }));
-}
 
 export async function generateMetadata({ params }: PageProps<"/products/[slug]">): Promise<Metadata> {
   const { slug } = await params;
@@ -25,6 +20,7 @@ export async function generateMetadata({ params }: PageProps<"/products/[slug]">
 }
 
 export default async function ProductPage({ params }: PageProps<"/products/[slug]">) {
+  await io();
   const { slug } = await params;
   const product = await getProduct(slug);
   if (!product) notFound();

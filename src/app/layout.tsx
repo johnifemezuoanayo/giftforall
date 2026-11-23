@@ -1,4 +1,7 @@
 import type { Metadata, Viewport } from "next";
+import { io } from "next/cache";
+import { connection } from "next/server";
+import { Suspense, type ReactNode } from "react";
 import { DM_Sans, Fraunces } from "next/font/google";
 import { siteUrl } from "@/config/site";
 import { getCategories, getContent } from "@/lib/api";
@@ -25,6 +28,7 @@ const logoFont = Fraunces({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
+  await connection();
   const { site, heroSlides } = await getContent();
   const title = `${site.name} | Unique & Unusual Gift Ideas for Everyone`;
   const shareImage = heroSlides[0]?.image;
@@ -55,7 +59,20 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
+  return (
+    <html lang="en" className={`${dmSans.variable} ${logoFont.variable}`} data-scroll-behavior="smooth">
+      <body className="flex min-h-screen flex-col">
+        <Suspense fallback={<main className="grid min-h-screen place-items-center" aria-busy="true">Loading gifts...</main>}>
+          <SiteLayout>{children}</SiteLayout>
+        </Suspense>
+      </body>
+    </html>
+  );
+}
+
+async function SiteLayout({ children }: { children: ReactNode }) {
+  await io();
   const [content, categories] = await Promise.all([getContent(), getCategories()]);
   const siteData = {
     site: content.site,
@@ -66,25 +83,21 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   };
 
   return (
-    <html lang="en" className={`${dmSans.variable} ${logoFont.variable}`} data-scroll-behavior="smooth">
-      <body className="flex min-h-screen flex-col">
-        <Providers siteData={siteData}>
-          <a
-            href="#main"
-            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
-          >
-            Skip to content
-          </a>
-          <AnnouncementBar />
-          <SiteHeader />
-          <main id="main" className="flex-1">
-            {children}
-          </main>
-          <SiteFooter />
-          <SavedDrawer />
-          <SavedToast />
-        </Providers>
-      </body>
-    </html>
+    <Providers siteData={siteData}>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+      >
+        Skip to content
+      </a>
+      <AnnouncementBar />
+      <SiteHeader />
+      <main id="main" className="flex-1">
+        {children}
+      </main>
+      <SiteFooter />
+      <SavedDrawer />
+      <SavedToast />
+    </Providers>
   );
 }

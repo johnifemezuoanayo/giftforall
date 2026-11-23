@@ -1,3 +1,4 @@
+import { io } from "next/cache";
 import type { Metadata } from "next";
 import { ArticleCard } from "@/components/cards/article-card";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function GuidesPage() {
+  await io();
   const { articles } = await getContent();
 
   return (

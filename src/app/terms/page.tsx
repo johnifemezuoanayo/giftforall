@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/legal-page";
+import { io } from "next/cache";
 import { getContent } from "@/lib/api";
 
 export const metadata: Metadata = {
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function TermsPage() {
+  await io();
   const { site } = await getContent();
 
   return (

@@ -1,9 +1,11 @@
 import type { MetadataRoute } from "next";
+import { connection } from "next/server";
 import { siteUrl } from "@/config/site";
 import { getCatalog, getPageHref } from "@/lib/catalog";
 import { getProductHref } from "@/lib/links";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  await connection();
   const catalog = await getCatalog();
   const { sections, articles } = catalog.content;
 

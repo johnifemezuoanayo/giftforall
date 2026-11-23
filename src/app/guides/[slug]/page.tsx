@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { io } from "next/cache";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArticleCard } from "@/components/cards/article-card";
@@ -7,11 +8,6 @@ import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { siteUrl } from "@/config/site";
 import { getContent, getProducts } from "@/lib/api";
 import { getGuide, getProductsForGuide } from "@/lib/catalog";
-
-export async function generateStaticParams() {
-  const { articles } = await getContent();
-  return articles.map((article) => ({ slug: article.href.replace("/guides/", "") }));
-}
 
 export async function generateMetadata({ params }: PageProps<"/guides/[slug]">): Promise<Metadata> {
   const { slug } = await params;
@@ -30,6 +26,7 @@ export async function generateMetadata({ params }: PageProps<"/guides/[slug]">):
 }
 
 export default async function GuidePage({ params }: PageProps<"/guides/[slug]">) {
+  await io();
   const { slug } = await params;
   const guide = await getGuide(slug);
   if (!guide) notFound();

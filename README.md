@@ -36,6 +36,7 @@ Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind CSS 4, Framer
 
 ## Before launch
 
+- The site reads its catalog and content from the backend at request time, so `npm run build` does not need a live API. Set `API_URL` and `NEXT_PUBLIC_API_URL` to the backend's internal and public addresses when running the site.
 - **Brand name:** change `site.name` in `src/config/site.ts`.
 - **Products:** everything in `src/data/` is sample data. Prices are marked "Sample price" on the page. Replace with approved affiliate product data. Each product only needs to match the `Product` type.
 - **Affiliate links:** sample products use retailer search links. Set `NEXT_PUBLIC_AMAZON_TAG` to add your Amazon Associates tag, or put real product links in `affiliateUrl`.

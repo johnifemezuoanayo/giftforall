@@ -1,3 +1,4 @@
+import { io } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
@@ -12,6 +13,7 @@ type SectionIndexProps = {
 
 // A page that lists every gift page in one section, like all recipients or all occasions.
 export async function SectionIndex({ section, title, intro }: SectionIndexProps) {
+  await io();
   const catalog = await getCatalog();
   const { sections } = catalog.content;
   const pages = catalog.pages.filter((page) => page.section === section && page.slug);

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronDown, ChevronRight } from "lucide-react";
+import { io } from "next/cache";
 import { GiftFinder } from "@/components/gift-finder/gift-finder";
 import { GiftIcon } from "@/components/icons/promise-icons";
 import { getCategories, getContent, getListingPages, getProducts } from "@/lib/api";
@@ -19,6 +20,7 @@ const howItWorks = [
 ];
 
 export default async function GiftFinderPage() {
+  await io();
   const [products, pages, categories, content] = await Promise.all([
     getProducts(),
     getListingPages(),
